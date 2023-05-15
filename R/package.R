@@ -19,6 +19,7 @@ env_file <- NULL
 prepare_client_files <- function() {
   for (aa in names(client_env$`__callr_data__`$sofile)) {
     fn <- client_env$`__callr_data__`$sofile[[aa]]
+    if (!dir.exists(dirname(fn))) dir.create(dirname(fn), recursive = TRUE)
     if (!file.exists(fn)) writeBin(clients[[aa]]$bytes, fn)
   }
 
